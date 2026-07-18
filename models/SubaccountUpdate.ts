@@ -14,8 +14,11 @@ export const SubaccountUpdate = Schema.Struct({
 }).pipe(
   Schema.encodeKeys({
     businessName: "business_name",
+    settlementBank: "settlement_bank",
     accountNumber: "account_number",
     percentageCharge: "percentage_charge",
+    primaryContactEmail: "primary_contact_email",
+    primaryContactName: "primary_contact_name",
     primaryContactPhone: "primary_contact_phone",
   }),
 )
@@ -31,7 +34,11 @@ export function SubaccountUpdateFromJSONTyped(json: unknown, _ignoreDiscriminato
 }
 
 export function SubaccountUpdateToJSON(value?: SubaccountUpdate | null): unknown {
-  if (value === undefined) return undefined
-  if (value === null) return null
+  if (value === undefined) {
+    return undefined
+  }
+  if (value === null) {
+    return null
+  }
   return Schema.encodeSync(SubaccountUpdate)(value)
 }

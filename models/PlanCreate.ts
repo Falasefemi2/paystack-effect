@@ -1,9 +1,10 @@
 import { Schema } from "effect"
+import { PlanInterval } from "../common"
 
 export const PlanCreate = Schema.Struct({
   name: Schema.String,
   amount: Schema.Number,
-  interval: Schema.Literals(["daily", "weekly", "monthly", "biannually", "annually"]),
+  interval: PlanInterval,
   description: Schema.optionalKey(Schema.String),
   sendInvoices: Schema.optionalKey(Schema.Boolean),
   sendSms: Schema.optionalKey(Schema.Boolean),
@@ -30,7 +31,11 @@ export function PlanCreateFromJSONTyped(json: unknown, _ignoreDiscriminator?: bo
 }
 
 export function PlanCreateToJSON(value?: PlanCreate | null): unknown {
-  if (value === undefined) return undefined
-  if (value === null) return null
+  if (value === undefined) {
+    return undefined
+  }
+  if (value === null) {
+    return null
+  }
   return Schema.encodeSync(PlanCreate)(value)
 }

@@ -14,6 +14,7 @@ export const TransferRecipientCreate = Schema.Struct({
     Schema.encodeKeys({
       bankCode: "bank_code",
       accountNumber: "account_number",
+      authorizationCode: "authorization_code",
     }),
   )
   .annotate({ identifier: "TransferRecipientCreate" })
@@ -32,7 +33,11 @@ export function TransferRecipientCreateFromJSONTyped(
 }
 
 export function TransferRecipientCreateToJSON(value?: TransferRecipientCreate | null): unknown {
-  if (value === undefined) return undefined
-  if (value === null) return null
+  if (value === undefined) {
+    return undefined
+  }
+  if (value === null) {
+    return null
+  }
   return Schema.encodeSync(TransferRecipientCreate)(value)
 }

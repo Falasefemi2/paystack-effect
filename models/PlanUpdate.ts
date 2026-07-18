@@ -1,9 +1,10 @@
 import { Schema } from "effect"
+import { PlanInterval } from "../common"
 
 export const PlanUpdate = Schema.Struct({
   name: Schema.optionalKey(Schema.String),
   amount: Schema.optionalKey(Schema.Number),
-  interval: Schema.optionalKey(Schema.Literals(["daily", "weekly", "monthly", "biannually", "annually"])),
+  interval: Schema.optionalKey(PlanInterval),
   // Source interface has this typed `boolean`, but JSDoc + PlanCreate's
   // matching field say string. Treating as string — verify against Paystack.
   description: Schema.optionalKey(Schema.String),
@@ -32,7 +33,11 @@ export function PlanUpdateFromJSONTyped(json: unknown, _ignoreDiscriminator?: bo
 }
 
 export function PlanUpdateToJSON(value?: PlanUpdate | null): unknown {
-  if (value === undefined) return undefined
-  if (value === null) return null
+  if (value === undefined) {
+    return undefined
+  }
+  if (value === null) {
+    return null
+  }
   return Schema.encodeSync(PlanUpdate)(value)
 }

@@ -8,7 +8,7 @@ export const Accepted = Schema.Struct({
 export interface Accepted extends Schema.Schema.Type<typeof Accepted> {}
 
 export function AcceptedFromJSON(json: unknown): Accepted {
-  return Schema.decodeUnknownSync(Accepted)(json)
+  return AcceptedFromJSONTyped(json)
 }
 
 export function AcceptedFromJSONTyped(json: unknown, _ignoreDiscriminator?: boolean): Accepted {

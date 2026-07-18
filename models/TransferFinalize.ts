@@ -3,7 +3,13 @@ import { Schema } from "effect"
 export const TransferFinalize = Schema.Struct({
   transferCode: Schema.String,
   otp: Schema.String,
-}).annotate({ identifier: "TransferFinalize" })
+})
+  .pipe(
+    Schema.encodeKeys({
+      transferCode: "transfer_code",
+    }),
+  )
+  .annotate({ identifier: "TransferFinalize" })
 
 export type TransferFinalize = Schema.Schema.Type<typeof TransferFinalize>
 
@@ -16,7 +22,11 @@ export function TransferFinalizeFromJSONTyped(json: unknown, _ignoreDiscriminato
 }
 
 export function TransferFinalizeToJSON(value?: TransferFinalize | null): unknown {
-  if (value === undefined) return undefined
-  if (value === null) return null
+  if (value === undefined) {
+    return undefined
+  }
+  if (value === null) {
+    return null
+  }
   return Schema.encodeSync(TransferFinalize)(value)
 }

@@ -1,11 +1,5 @@
-import { Schema, SchemaGetter } from "effect"
-
-const DateFromString = Schema.String.pipe(
-  Schema.decodeTo(Schema.Date, {
-    decode: SchemaGetter.transform((s: string) => new Date(s)),
-    encode: SchemaGetter.transform((d: Date) => d.toISOString()),
-  }),
-)
+import { Schema } from "effect"
+import { DateFromString } from "../common"
 
 export const PaymentRequestCreate = Schema.Struct({
   customer: Schema.String,
@@ -47,7 +41,11 @@ export function PaymentRequestCreateFromJSONTyped(json: unknown, _ignoreDiscrimi
 }
 
 export function PaymentRequestCreateToJSON(value?: PaymentRequestCreate | null): unknown {
-  if (value === undefined) return undefined
-  if (value === null) return null
+  if (value === undefined) {
+    return undefined
+  }
+  if (value === null) {
+    return null
+  }
   return Schema.encodeSync(PaymentRequestCreate)(value)
 }

@@ -5,7 +5,14 @@ export const CustomerUpdate = Schema.Struct({
   lastName: Schema.optionalKey(Schema.String),
   phone: Schema.optionalKey(Schema.String),
   metadata: Schema.optionalKey(Schema.String),
-}).annotate({ identifier: "CustomerUpdate" })
+})
+  .pipe(
+    Schema.encodeKeys({
+      firstName: "first_name",
+      lastName: "last_name",
+    }),
+  )
+  .annotate({ identifier: "CustomerUpdate" })
 
 export type CustomerUpdate = Schema.Schema.Type<typeof CustomerUpdate>
 
@@ -18,7 +25,11 @@ export function CustomerUpdateFromJSONTyped(json: unknown, _ignoreDiscriminator?
 }
 
 export function CustomerUpdateToJSON(value?: CustomerUpdate | null): unknown {
-  if (value === undefined) return undefined
-  if (value === null) return null
+  if (value === undefined) {
+    return undefined
+  }
+  if (value === null) {
+    return null
+  }
   return Schema.encodeSync(CustomerUpdate)(value)
 }

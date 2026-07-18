@@ -8,7 +8,7 @@ export const BulkChargeInitiate = Schema.Struct({
 export type BulkChargeInitiate = Schema.Schema.Type<typeof BulkChargeInitiate>
 
 export function BulkChargeInitiateFromJSON(json: unknown): BulkChargeInitiate {
-  return Schema.decodeUnknownSync(BulkChargeInitiate)(json)
+  return BulkChargeInitiateFromJSONTyped(json)
 }
 
 export function BulkChargeInitiateFromJSONTyped(json: unknown, _ignoreDiscriminator?: boolean): BulkChargeInitiate {

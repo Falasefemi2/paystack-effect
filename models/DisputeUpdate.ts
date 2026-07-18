@@ -3,7 +3,14 @@ import { Schema } from "effect"
 export const DisputeUpdate = Schema.Struct({
   refundAmount: Schema.String,
   uploadedFilename: Schema.optionalKey(Schema.String),
-}).annotate({ identifier: "DisputeUpdate" })
+})
+  .pipe(
+    Schema.encodeKeys({
+      refundAmount: "refund_amount",
+      uploadedFilename: "uploaded_filename",
+    }),
+  )
+  .annotate({ identifier: "DisputeUpdate" })
 
 export type DisputeUpdate = Schema.Schema.Type<typeof DisputeUpdate>
 
@@ -16,7 +23,11 @@ export function DisputeUpdateFromJSONTyped(json: unknown, _ignoreDiscriminator?:
 }
 
 export function DisputeUpdateToJSON(value?: DisputeUpdate | null): unknown {
-  if (value === undefined) return undefined
-  if (value === null) return null
+  if (value === undefined) {
+    return undefined
+  }
+  if (value === null) {
+    return null
+  }
   return Schema.encodeSync(DisputeUpdate)(value)
 }

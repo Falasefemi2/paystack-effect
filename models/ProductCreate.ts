@@ -1,10 +1,11 @@
 import { Schema } from "effect"
+import { Currency } from "../common"
 
 export const ProductCreate = Schema.Struct({
   name: Schema.String,
   description: Schema.String,
   price: Schema.Number,
-  currency: Schema.Literals(["NGN", "GHS", "ZAR", "USD"]),
+  currency: Currency,
   limited: Schema.optionalKey(Schema.Boolean),
   quantity: Schema.optionalKey(Schema.Number),
 }).annotate({ identifier: "ProductCreate" })
@@ -20,7 +21,11 @@ export function ProductCreateFromJSONTyped(json: unknown, _ignoreDiscriminator?:
 }
 
 export function ProductCreateToJSON(value?: ProductCreate | null): unknown {
-  if (value === undefined) return undefined
-  if (value === null) return null
+  if (value === undefined) {
+    return undefined
+  }
+  if (value === null) {
+    return null
+  }
   return Schema.encodeSync(ProductCreate)(value)
 }

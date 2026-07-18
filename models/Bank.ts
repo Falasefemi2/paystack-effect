@@ -3,12 +3,18 @@ import { Schema } from "effect"
 export const Bank = Schema.Struct({
   code: Schema.optionalKey(Schema.String),
   accountNumber: Schema.optionalKey(Schema.String),
-}).annotate({ identifier: "Bank" })
+})
+  .pipe(
+    Schema.encodeKeys({
+      accountNumber: "account_number",
+    }),
+  )
+  .annotate({ identifier: "Bank" })
 
 export type Bank = Schema.Schema.Type<typeof Bank>
 
 export function BankFromJSON(json: unknown): Bank {
-  return Schema.decodeUnknownSync(Bank)(json)
+  return BankFromJSONTyped(json)
 }
 
 export function BankFromJSONTyped(json: unknown, _ignoreDiscriminator?: boolean): Bank {

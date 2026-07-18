@@ -6,7 +6,14 @@ export const CustomerValidate = Schema.Struct({
   type: Schema.String,
   value: Schema.String,
   country: Schema.String,
-}).annotate({ identifier: "CustomerValidate" })
+})
+  .pipe(
+    Schema.encodeKeys({
+      firstName: "first_name",
+      lastName: "last_name",
+    }),
+  )
+  .annotate({ identifier: "CustomerValidate" })
 
 export type CustomerValidate = Schema.Schema.Type<typeof CustomerValidate>
 
@@ -19,7 +26,11 @@ export function CustomerValidateFromJSONTyped(json: unknown, _ignoreDiscriminato
 }
 
 export function CustomerValidateToJSON(value?: CustomerValidate | null): unknown {
-  if (value === undefined) return undefined
-  if (value === null) return null
+  if (value === undefined) {
+    return undefined
+  }
+  if (value === null) {
+    return null
+  }
   return Schema.encodeSync(CustomerValidate)(value)
 }

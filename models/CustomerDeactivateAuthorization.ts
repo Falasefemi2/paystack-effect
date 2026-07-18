@@ -2,7 +2,13 @@ import { Schema } from "effect"
 
 export const CustomerDeactivateAuthorization = Schema.Struct({
   authorizationCode: Schema.String,
-}).annotate({ identifier: "CustomerDeactivateAuthorization" })
+})
+  .pipe(
+    Schema.encodeKeys({
+      authorizationCode: "authorization_code",
+    }),
+  )
+  .annotate({ identifier: "CustomerDeactivateAuthorization" })
 
 export type CustomerDeactivateAuthorization = Schema.Schema.Type<typeof CustomerDeactivateAuthorization>
 
@@ -18,7 +24,11 @@ export function CustomerDeactivateAuthorizationFromJSONTyped(
 }
 
 export function CustomerDeactivateAuthorizationToJSON(value?: CustomerDeactivateAuthorization | null): unknown {
-  if (value === undefined) return undefined
-  if (value === null) return null
+  if (value === undefined) {
+    return undefined
+  }
+  if (value === null) {
+    return null
+  }
   return Schema.encodeSync(CustomerDeactivateAuthorization)(value)
 }

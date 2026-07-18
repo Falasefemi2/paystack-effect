@@ -5,7 +5,14 @@ export const DedicatedVirtualAccountCreate = Schema.Struct({
   preferredBank: Schema.optionalKey(Schema.String),
   subaccount: Schema.optionalKey(Schema.String),
   splitCode: Schema.optionalKey(Schema.String),
-}).annotate({ identifier: "DedicatedVirtualAccountCreate" })
+})
+  .pipe(
+    Schema.encodeKeys({
+      preferredBank: "preferred_bank",
+      splitCode: "split_code",
+    }),
+  )
+  .annotate({ identifier: "DedicatedVirtualAccountCreate" })
 
 export type DedicatedVirtualAccountCreate = Schema.Schema.Type<typeof DedicatedVirtualAccountCreate>
 
@@ -21,7 +28,11 @@ export function DedicatedVirtualAccountCreateFromJSONTyped(
 }
 
 export function DedicatedVirtualAccountCreateToJSON(value?: DedicatedVirtualAccountCreate | null): unknown {
-  if (value === undefined) return undefined
-  if (value === null) return null
+  if (value === undefined) {
+    return undefined
+  }
+  if (value === null) {
+    return null
+  }
   return Schema.encodeSync(DedicatedVirtualAccountCreate)(value)
 }

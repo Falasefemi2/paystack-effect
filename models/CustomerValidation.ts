@@ -9,7 +9,16 @@ export const CustomerValidation = Schema.Struct({
   bankCode: Schema.String,
   accountNumber: Schema.String,
   value: Schema.optionalKey(Schema.String),
-}).annotate({ identifier: "CustomerValidation" })
+})
+  .pipe(
+    Schema.encodeKeys({
+      firstName: "first_name",
+      lastName: "last_name",
+      bankCode: "bank_code",
+      accountNumber: "account_number",
+    }),
+  )
+  .annotate({ identifier: "CustomerValidation" })
 
 export type CustomerValidation = Schema.Schema.Type<typeof CustomerValidation>
 
@@ -22,7 +31,11 @@ export function CustomerValidationFromJSONTyped(json: unknown, _ignoreDiscrimina
 }
 
 export function CustomerValidationToJSON(value?: CustomerValidation | null): unknown {
-  if (value === undefined) return undefined
-  if (value === null) return null
+  if (value === undefined) {
+    return undefined
+  }
+  if (value === null) {
+    return null
+  }
   return Schema.encodeSync(CustomerValidation)(value)
 }

@@ -6,7 +6,14 @@ export const DisputeResolve = Schema.Struct({
   refundAmount: Schema.String,
   uploadedFilename: Schema.String,
   evidence: Schema.optionalKey(Schema.String),
-}).annotate({ identifier: "DisputeResolve" })
+})
+  .pipe(
+    Schema.encodeKeys({
+      refundAmount: "refund_amount",
+      uploadedFilename: "uploaded_filename",
+    }),
+  )
+  .annotate({ identifier: "DisputeResolve" })
 
 export type DisputeResolve = Schema.Schema.Type<typeof DisputeResolve>
 
@@ -19,7 +26,11 @@ export function DisputeResolveFromJSONTyped(json: unknown, _ignoreDiscriminator?
 }
 
 export function DisputeResolveToJSON(value?: DisputeResolve | null): unknown {
-  if (value === undefined) return undefined
-  if (value === null) return null
+  if (value === undefined) {
+    return undefined
+  }
+  if (value === null) {
+    return null
+  }
   return Schema.encodeSync(DisputeResolve)(value)
 }

@@ -12,7 +12,13 @@ export const TransactionChargeAuthorization = Schema.Struct({
   transactionCharge: Schema.optionalKey(Schema.String),
   bearer: Schema.optionalKey(Schema.String),
   queue: Schema.optionalKey(Schema.Boolean),
-})
+}).pipe(
+  Schema.encodeKeys({
+    authorizationCode: "authorization_code",
+    splitCode: "split_code",
+    transactionCharge: "transaction_charge",
+  }),
+)
 
 export type TransactionChargeAuthorization = Schema.Schema.Type<typeof TransactionChargeAuthorization>
 
@@ -28,7 +34,11 @@ export function TransactionChargeAuthorizationFromJSONTyped(
 }
 
 export function TransactionChargeAuthorizationToJSON(value?: TransactionChargeAuthorization | null): unknown {
-  if (value === undefined) return undefined
-  if (value === null) return null
+  if (value === undefined) {
+    return undefined
+  }
+  if (value === null) {
+    return null
+  }
   return Schema.encodeSync(TransactionChargeAuthorization)(value)
 }
