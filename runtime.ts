@@ -94,6 +94,7 @@ export interface Interface {
   readonly del: <A>(
     path: string,
     schema: Schema.Decoder<A>,
+    body?: unknown,
   ) => Effect.Effect<A, PaystackApiError | PaystackRequestError>
 }
 
@@ -198,8 +199,13 @@ export const layer: Layer.Layer<Service, never, PaystackConfig> = Layer.effect(
     const del = Effect.fn("PaystackHttpClient.del")(function* <A>(
       path: string,
       schema: Schema.Decoder<A>,
+      body?: unknown,
     ): Effect.fn.Return<A, PaystackApiError | PaystackRequestError> {
-      return yield* decodeOrFail(HttpClientRequest.delete(path), schema)
+      const req = HttpClientRequest.delete(path)
+      return yield* decodeOrFail(
+        body !== undefined ? req.pipe(HttpClientRequest.bodyJsonUnsafe(body)) : req,
+        schema,
+      )
     })
 
     return Service.of({ get, post, put, del })
