@@ -202,10 +202,7 @@ export const layer: Layer.Layer<Service, never, PaystackConfig> = Layer.effect(
       body?: unknown,
     ): Effect.fn.Return<A, PaystackApiError | PaystackRequestError> {
       const req = HttpClientRequest.delete(path)
-      return yield* decodeOrFail(
-        body !== undefined ? req.pipe(HttpClientRequest.bodyJsonUnsafe(body)) : req,
-        schema,
-      )
+      return yield* decodeOrFail(body !== undefined ? req.pipe(HttpClientRequest.bodyJsonUnsafe(body)) : req, schema)
     })
 
     return Service.of({ get, post, put, del })
