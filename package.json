@@ -1,0 +1,25 @@
+{
+  "name": "paystack-effect",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "prepare": "effect-language-service patch",
+    "format": "biome format --write .",
+    "format:check": "biome format .",
+    "lint:check": "biome lint .",
+    "check": "biome check --write .",
+    "check:ci": "biome check ."
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.4",
+    "@effect/language-service": "^0.87.0",
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^7.0.2"
+  },
+  "dependencies": {
+    "effect": "^4.0.0-beta.98"
+  }
+}
