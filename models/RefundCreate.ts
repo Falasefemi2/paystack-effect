@@ -1,5 +1,5 @@
 import { Schema } from "effect"
-import { Currency } from "../common"
+import { Currency } from "../common.js"
 
 export const RefundCreate = Schema.Struct({
   transaction: Schema.String,

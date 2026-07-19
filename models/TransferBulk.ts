@@ -1,5 +1,5 @@
 import { Schema } from "effect"
-import { TransferInitiate } from "./TransferInitiate"
+import { TransferInitiate } from "./TransferInitiate.js"
 
 export const TransferBulk = Schema.Struct({
   source: Schema.optionalKey(Schema.Literal("balance")),

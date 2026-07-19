@@ -1,5 +1,5 @@
 import { Schema } from "effect"
-import { PlanInterval } from "../common"
+import { PlanInterval } from "../common.js"
 
 export const PlanCreate = Schema.Struct({
   name: Schema.String,

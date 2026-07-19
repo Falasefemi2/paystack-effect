@@ -1,5 +1,5 @@
 import { Schema } from "effect"
-import { TransferRecipientCreate } from "./TransferRecipientCreate"
+import { TransferRecipientCreate } from "./TransferRecipientCreate.js"
 
 export const TransferRecipientBulk = Schema.Struct({
   batch: Schema.Array(TransferRecipientCreate),

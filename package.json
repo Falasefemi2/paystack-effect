@@ -17,6 +17,7 @@
   "type": "module",
   "scripts": {
     "build": "tsc --project tsconfig.build.json",
+    "prepublishOnly": "npm run build",
     "start": "bun run server.ts",
     "prepare": "effect-language-service patch",
     "format": "biome format --write .",
@@ -25,16 +26,21 @@
     "check": "biome check --write .",
     "check:ci": "biome check ."
   },
+  "peerDependencies": {
+    "typescript": "^7.0.2",
+    "effect": "^4.0.0-beta.98"
+  },
+  "peerDependenciesMeta": {
+    "typescript": {
+      "optional": true
+    }
+  },
   "devDependencies": {
     "@biomejs/biome": "2.5.4",
     "@effect/language-service": "^0.87.0",
-    "@types/bun": "latest"
-  },
-  "peerDependencies": {
-    "typescript": "^7.0.2"
-  },
-  "dependencies": {
-    "effect": "^4.0.0-beta.98",
-    "@effect/platform-bun": "https://pkg.pr.new/Effect-TS/effect-smol/@effect/platform-bun@4b6856f"
+    "@effect/platform-bun": "https://pkg.pr.new/Effect-TS/effect-smol/@effect/platform-bun@4b6856f",
+    "@types/bun": "latest",
+    "@types/node": "latest",
+    "effect": "^4.0.0-beta.98"
   }
 }

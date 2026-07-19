@@ -1,5 +1,5 @@
 import { Schema } from "effect"
-import { Currency } from "../common"
+import { Currency } from "../common.js"
 
 export const ProductCreate = Schema.Struct({
   name: Schema.String,

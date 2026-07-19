@@ -1,5 +1,5 @@
 import { Schema } from "effect"
-import { DateFromString } from "../common"
+import { DateFromString } from "../common.js"
 
 export const PaymentRequestCreate = Schema.Struct({
   customer: Schema.String,

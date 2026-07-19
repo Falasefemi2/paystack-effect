@@ -7,8 +7,9 @@
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
-    "moduleResolution": "bundler"
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext"
   },
-  "include": ["index.ts", "runtime.ts", "apis/**/*", "models/**/*"],
+  "include": ["index.ts", "apis/**/*", "models/**/*"],
   "exclude": ["server.ts", "node_modules", "dist"]
 }

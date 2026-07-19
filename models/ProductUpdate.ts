@@ -1,5 +1,5 @@
 import { Schema } from "effect"
-import { Currency } from "../common"
+import { Currency } from "../common.js"
 
 export const ProductUpdate = Schema.Struct({
   name: Schema.optionalKey(Schema.String),

@@ -1,6 +1,6 @@
 import { Context, Effect, Layer } from "effect"
 import { PlanCreateFromJSON, PlanUpdateFromJSON, Response } from "../models/index.js"
-import { PaystackHttpClient } from "../runtime"
+import { PaystackHttpClient } from "../runtime.js"
 
 export interface CreateRequest {
   readonly name: string

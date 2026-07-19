@@ -1,5 +1,5 @@
 import { Schema } from "effect"
-import { SplitSubaccounts } from "./SplitSubaccounts"
+import { SplitSubaccounts } from "./SplitSubaccounts.js"
 
 export const SplitCreate = Schema.Struct({
   name: Schema.String,
