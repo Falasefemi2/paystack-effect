@@ -1,11 +1,11 @@
 import { Schema } from "effect"
 
 export const DisputeResolve = Schema.Struct({
-  resolution: Schema.String,
-  message: Schema.String,
-  refundAmount: Schema.String,
-  uploadedFilename: Schema.String,
-  evidence: Schema.optionalKey(Schema.String),
+  resolution: Schema.optionalKey(Schema.UndefinedOr(Schema.String)),
+  message: Schema.optionalKey(Schema.UndefinedOr(Schema.String)),
+  refundAmount: Schema.optionalKey(Schema.UndefinedOr(Schema.String)),
+  uploadedFilename: Schema.optionalKey(Schema.UndefinedOr(Schema.String)),
+  evidence: Schema.optionalKey(Schema.UndefinedOr(Schema.String)),
 })
   .pipe(
     Schema.encodeKeys({

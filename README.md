@@ -7,9 +7,9 @@ This package provides a type-safe, functional integration wrapper for Paystack l
 ## Installation
 
 ```bash
-npm install paystack-effect
+npm i @pharlase/paystack-effect
 # or using bun
-bun add paystack-effect
+bun add  @pharlase/paystack-effect
 ```
 
 ## Consuming as a Library
@@ -20,13 +20,13 @@ To use the library in your Effect TS workflows:
 Provide your API key and map the client SDK to your application's environment.
 
 ```typescript
-import { Effect, Layer } from "effect"
-import { PaystackHttpClient, Transaction } from "paystack-effect"
+import {Config, Effect, Layer } from "effect"
+import { PaystackHttpClient, Transaction } from "@pharlase/paystack-effect";
 
 // Create the live HTTP client layer with your config
 const PaystackConfigLive = PaystackHttpClient.layerConfig({
-  apiKey: "YOUR_PAYSTACK_SECRET_KEY"
-})
+	apiKey: Config.redacted("PAYSTACK_SECRET_KEY"),
+});
 
 const PaystackClientLive = PaystackHttpClient.layer.pipe(
   Layer.provide(PaystackConfigLive)
@@ -38,7 +38,7 @@ Use the API modules directly in functional generators:
 
 ```typescript
 import { Effect } from "effect"
-import { Transaction } from "paystack-effect"
+import { Transaction } from "@pharlase/paystack-effect"
 
 const initializePayment = Effect.gen(function* () {
   const transactionService = yield* Transaction.Service

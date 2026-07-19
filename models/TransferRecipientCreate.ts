@@ -3,12 +3,12 @@ import { Schema } from "effect"
 export const TransferRecipientCreate = Schema.Struct({
   type: Schema.String,
   name: Schema.String,
-  accountNumber: Schema.String,
-  bankCode: Schema.String,
-  description: Schema.optionalKey(Schema.String),
-  currency: Schema.optionalKey(Schema.String),
-  authorizationCode: Schema.optionalKey(Schema.String),
-  metadata: Schema.optionalKey(Schema.String),
+  accountNumber: Schema.optionalKey(Schema.UndefinedOr(Schema.String)),
+  bankCode: Schema.optionalKey(Schema.UndefinedOr(Schema.String)),
+  description: Schema.optionalKey(Schema.UndefinedOr(Schema.String)),
+  currency: Schema.optionalKey(Schema.UndefinedOr(Schema.String)),
+  authorizationCode: Schema.optionalKey(Schema.UndefinedOr(Schema.String)),
+  metadata: Schema.optionalKey(Schema.UndefinedOr(Schema.String)),
 })
   .pipe(
     Schema.encodeKeys({
